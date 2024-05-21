@@ -13,18 +13,23 @@ export const toppings = [
 export const renderToppings = () => {
   const topping = document.querySelector('toppings');
   toppings.innerHTML += '';
-  if (topping.selected) {
-    topping.classList = '.topping--selected';
+  toppings.forEach(topping =>  {
+    if (topping.selected) {
+     topping.classList.add('topping--selected');
   }
+  const toppings = document.querySelectorAll('.topping')
   toppings.forEach((topping) => {
     document.body.innerHTML += `<div>
     <h3>${topping.name}</h3>
     <p>${topping.price} Eur</p>
     </div>`;
   });
-};
+
 
 export const toggleTopping = (index) => {
   toppings[index].selected = !toppings[index].selected;
   renderToppings(toppings);
 };
+}
+
+
