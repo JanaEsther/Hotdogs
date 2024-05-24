@@ -11,25 +11,27 @@ export const toppings = [
 ];
 
 export const renderToppings = () => {
-  const topping = document.querySelector('toppings');
-  toppings.innerHTML += '';
-  toppings.forEach(topping =>  {
-    if (topping.selected) {
-     topping.classList.add('topping--selected');
-  }
-  const toppings = document.querySelectorAll('.topping')
-  toppings.forEach((topping) => {
-    document.body.innerHTML += `<div>
-    <h3>${topping.name}</h3>
-    <p>${topping.price} Eur</p>
-    </div>`;
+  document.body.innerHTML = '';
+  toppings.forEach((item) => {
+    const toppingClass = item.selected
+      ? 'topping topping--selected'
+      : 'topping';
+
+    document.body.innerHTML += `
+    <div class="${toppingClass}">
+      <h3>${item.name}</h3>
+      <p>${item.price} Eur</p>
+    </div>
+  `;
   });
-
-
-export const toggleTopping = (index) => {
-  toppings[index].selected = !toppings[index].selected;
-  renderToppings(toppings);
+  document.querySelectorAll('.topping').forEach((element, index) => {
+    element.addEventListener('click', () => {
+      toggleToppings(index);
+    });
+  });
 };
-}
 
-
+export const toggleToppings = (index) => {
+  toppings[index].selected = !toppings[index].selected;
+  renderToppings();
+};
